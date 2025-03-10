@@ -20,6 +20,6 @@ func (m *MockRepository) FindAll() []User {
 }
 
 func (m *MockRepository) DeleteByID(id int) error {
-	//TODO implement me
-	panic("implement me")
+	fmt.Println("Call DeleteByID function")
+	return nil
 }

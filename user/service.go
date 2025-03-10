@@ -17,5 +17,5 @@ func (uService *Service) ListUsers() []User {
 }
 
 func (uService *Service) RemoveUser(id int) error {
-	panic("implement me")
+	return uService.repo.DeleteByID(id)
 }

@@ -32,6 +32,7 @@ func main() {
 			find(service)
 		case "create":
 		case "delete":
+			deleteUser(service)
 		case "exit":
 			loop = false
 		default:
@@ -53,15 +54,35 @@ func find(service user.Service) {
 	if err != nil {
 		panic(err.Error())
 	}
-
 	id, err := strconv.Atoi(sId)
 	if err != nil {
 		panic(err.Error())
 	}
+
 	fUser, err := service.GetUser(id)
 	if err != nil {
 		fmt.Println(err.Error())
 	} else {
 		fmt.Println(fUser)
+	}
+}
+
+func deleteUser(service user.Service) {
+	var sId string
+	fmt.Println("Type user ID: ")
+	_, err := fmt.Scanln(&sId)
+	if err != nil {
+		panic(err.Error())
+	}
+	id, err := strconv.Atoi(sId)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	err = service.RemoveUser(id)
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		fmt.Println("User removed")
 	}
 }

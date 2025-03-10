@@ -28,6 +28,11 @@ func (i *InMemoryRepository) FindAll() []User {
 }
 
 func (i *InMemoryRepository) DeleteByID(id int) error {
-	//TODO implement me
-	panic("implement me")
+	_, ok := i.users[id]
+	if !ok {
+		return errors.New("user not found")
+	}
+	delete(i.users, id)
+
+	return nil
 }
