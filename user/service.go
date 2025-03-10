@@ -15,3 +15,7 @@ func (uService *Service) GetUser(id int) (User, error) {
 func (uService *Service) ListUsers() []User {
 	return uService.repo.FindAll()
 }
+
+func (uService *Service) RemoveUser(id int) error {
+	panic("implement me")
+}

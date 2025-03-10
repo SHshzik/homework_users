@@ -1,5 +1,7 @@
 package user
 
+import "fmt"
+
 type MockRepository struct{}
 
 func (m *MockRepository) Save(user User) error {
@@ -13,8 +15,8 @@ func (m *MockRepository) FindByID(id int) (User, error) {
 }
 
 func (m *MockRepository) FindAll() []User {
-	//TODO implement me
-	panic("implement me")
+	fmt.Println("Call FindAll function")
+	return []User{}
 }
 
 func (m *MockRepository) DeleteByID(id int) error {

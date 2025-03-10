@@ -19,7 +19,7 @@ func main() {
 
 	var c string
 	for loop := true; loop; {
-		fmt.Println("Type one of available command: list, exit")
+		fmt.Println("Type one of available command: list, find, create, delete, exit")
 		_, err := fmt.Scanln(&c)
 		if err != nil {
 			panic(err.Error())
@@ -27,6 +27,9 @@ func main() {
 		switch c {
 		case "list":
 			fmt.Println(service.ListUsers())
+		case "find":
+		case "create":
+		case "delete":
 		case "exit":
 			loop = false
 		default:
