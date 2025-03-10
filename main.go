@@ -1,13 +1,23 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"user_workhome/user"
 )
 
 func main() {
+	d := flag.Bool("debug", false, "debug mode")
+	flag.Parse()
+
+	var service user.Service
+	if *d {
+		service = user.NewService(&user.MockRepository{})
+	} else {
+		service = user.NewService(&user.InMemoryRepository{})
+	}
+
 	var c string
-	service := user.NewService(&user.InMemoryRepository{})
 	for loop := true; loop; {
 		fmt.Println("Type one of available command: list, exit")
 		_, err := fmt.Scanln(&c)
