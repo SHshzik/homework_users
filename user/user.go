@@ -1,6 +1,7 @@
 package user
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -10,6 +11,10 @@ type User struct {
 	Email     string
 	Role      string // add enum for role = (admin, user, guest)
 	CreatedAt time.Time
+}
+
+func (u User) String() string {
+	return fmt.Sprintf("User: { ID: %d, Name: %s, Email: %s, Role: %s, CreatedAt: %s}", u.ID, u.Name, u.Email, u.Role, u.CreatedAt.Format(time.RFC3339))
 }
 
 type Repository interface {

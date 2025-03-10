@@ -37,7 +37,7 @@ func main() {
 		case "exit":
 			loop = false
 		default:
-			loop = false
+			fmt.Println("Wrong command")
 		}
 	}
 }

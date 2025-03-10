@@ -2,7 +2,6 @@ package user
 
 import (
 	"errors"
-	"fmt"
 )
 
 type InMemoryRepository struct {
@@ -11,10 +10,10 @@ type InMemoryRepository struct {
 }
 
 func (i *InMemoryRepository) Save(user *User) error {
-	fmt.Println(i.Users)
 	user.ID = i.lastId
 	i.Users[i.lastId] = *user
 	i.lastId++
+
 	return nil
 }
 
@@ -27,8 +26,6 @@ func (i *InMemoryRepository) FindByID(id int) (User, error) {
 }
 
 func (i *InMemoryRepository) FindAll() []User {
-	fmt.Println(i.Users)
-	fmt.Println(len(i.Users))
 	r := make([]User, 0, len(i.Users))
 	for _, user := range i.Users {
 		r = append(r, user)
