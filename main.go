@@ -15,7 +15,7 @@ func main() {
 	if *d {
 		service = user.NewService(&user.MockRepository{})
 	} else {
-		service = user.NewService(&user.InMemoryRepository{})
+		service = user.NewService(&user.InMemoryRepository{Users: make(map[int]user.User)})
 	}
 
 	var c string
@@ -31,6 +31,7 @@ func main() {
 		case "find":
 			find(service)
 		case "create":
+			createUser(service)
 		case "delete":
 			deleteUser(service)
 		case "exit":
@@ -85,4 +86,31 @@ func deleteUser(service user.Service) {
 	} else {
 		fmt.Println("User removed")
 	}
+}
+
+func createUser(service user.Service) {
+	var (
+		name  string
+		email string
+		role  string
+	)
+	fmt.Println("Type user name, email and role separated by space: ")
+	_, err := fmt.Scan(&name)
+	if err != nil {
+		panic(err.Error())
+	}
+	_, err = fmt.Scan(&email)
+	if err != nil {
+		panic(err.Error())
+	}
+	_, err = fmt.Scan(&role)
+	if err != nil {
+		panic(err.Error())
+	}
+	newUser, err := service.CreateUser(name, email, role)
+	if err != nil {
+		panic(err.Error())
+	}
+	fmt.Println("User successfully created")
+	fmt.Println(newUser)
 }

@@ -1,18 +1,25 @@
 package user
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 type InMemoryRepository struct {
-	users map[int]User
+	Users  map[int]User
+	lastId int
 }
 
-func (i *InMemoryRepository) Save(user User) error {
-	//TODO implement me
-	panic("implement me")
+func (i *InMemoryRepository) Save(user *User) error {
+	fmt.Println(i.Users)
+	user.ID = i.lastId
+	i.Users[i.lastId] = *user
+	i.lastId++
+	return nil
 }
 
 func (i *InMemoryRepository) FindByID(id int) (User, error) {
-	user, ok := i.users[id]
+	user, ok := i.Users[id]
 	if !ok {
 		return User{}, errors.New("user not found")
 	}
@@ -20,19 +27,21 @@ func (i *InMemoryRepository) FindByID(id int) (User, error) {
 }
 
 func (i *InMemoryRepository) FindAll() []User {
-	r := make([]User, len(i.users))
-	for _, user := range i.users {
+	fmt.Println(i.Users)
+	fmt.Println(len(i.Users))
+	r := make([]User, 0, len(i.Users))
+	for _, user := range i.Users {
 		r = append(r, user)
 	}
 	return r
 }
 
 func (i *InMemoryRepository) DeleteByID(id int) error {
-	_, ok := i.users[id]
+	_, ok := i.Users[id]
 	if !ok {
 		return errors.New("user not found")
 	}
-	delete(i.users, id)
+	delete(i.Users, id)
 
 	return nil
 }

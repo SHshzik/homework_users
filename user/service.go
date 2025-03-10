@@ -1,11 +1,19 @@
 package user
 
+import "time"
+
 type Service struct {
 	repo Repository
 }
 
-func (uService *Service) CreateUser(name, email, role string) (User, error) {
-	panic("implement me")
+func (uService *Service) CreateUser(name, email, role string) (*User, error) {
+	nUser := &User{
+		Name:      name,
+		Email:     email,
+		Role:      role,
+		CreatedAt: time.Now(),
+	}
+	return nUser, uService.repo.Save(nUser)
 }
 
 func (uService *Service) GetUser(id int) (User, error) {

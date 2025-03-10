@@ -13,7 +13,7 @@ type User struct {
 }
 
 type Repository interface {
-	Save(user User) error
+	Save(user *User) error
 	FindByID(id int) (User, error)
 	FindAll() []User
 	DeleteByID(id int) error

@@ -4,9 +4,9 @@ import "fmt"
 
 type MockRepository struct{}
 
-func (m *MockRepository) Save(user User) error {
-	//TODO implement me
-	panic("implement me")
+func (m *MockRepository) Save(user *User) error {
+	fmt.Println("Call Save function")
+	return nil
 }
 
 func (m *MockRepository) FindByID(id int) (User, error) {
