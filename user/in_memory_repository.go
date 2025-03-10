@@ -1,5 +1,7 @@
 package user
 
+import "errors"
+
 type InMemoryRepository struct {
 	users map[int]User
 }
@@ -10,8 +12,11 @@ func (i *InMemoryRepository) Save(user User) error {
 }
 
 func (i *InMemoryRepository) FindByID(id int) (User, error) {
-	//TODO implement me
-	panic("implement me")
+	user, ok := i.users[id]
+	if !ok {
+		return User{}, errors.New("user not found")
+	}
+	return user, nil
 }
 
 func (i *InMemoryRepository) FindAll() []User {

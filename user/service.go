@@ -9,7 +9,7 @@ func (uService *Service) CreateUser(name, email, role string) (User, error) {
 }
 
 func (uService *Service) GetUser(id int) (User, error) {
-	panic("implement me")
+	return uService.repo.FindByID(id)
 }
 
 func (uService *Service) ListUsers() []User {

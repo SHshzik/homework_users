@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strconv"
 	"user_workhome/user"
 )
 
@@ -19,15 +20,16 @@ func main() {
 
 	var c string
 	for loop := true; loop; {
-		fmt.Println("Type one of available command: list, find, create, delete, exit")
+		fmt.Println("Type one of available command: list, find, create, delete, exit:")
 		_, err := fmt.Scanln(&c)
 		if err != nil {
 			panic(err.Error())
 		}
 		switch c {
 		case "list":
-			fmt.Println(service.ListUsers())
+			list(service)
 		case "find":
+			find(service)
 		case "create":
 		case "delete":
 		case "exit":
@@ -36,6 +38,30 @@ func main() {
 			loop = false
 		}
 	}
-	//u := user.User{1, "w", "e", "d", time.Now()}
-	//fmt.Printf("%#v\n", u)
+}
+
+func list(service user.Service) {
+	users := service.ListUsers()
+
+	fmt.Println(users)
+}
+
+func find(service user.Service) {
+	var sId string
+	fmt.Println("Type user ID: ")
+	_, err := fmt.Scanln(&sId)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	id, err := strconv.Atoi(sId)
+	if err != nil {
+		panic(err.Error())
+	}
+	fUser, err := service.GetUser(id)
+	if err != nil {
+		fmt.Println(err.Error())
+	} else {
+		fmt.Println(fUser)
+	}
 }

@@ -10,8 +10,8 @@ func (m *MockRepository) Save(user User) error {
 }
 
 func (m *MockRepository) FindByID(id int) (User, error) {
-	//TODO implement me
-	panic("implement me")
+	fmt.Println("Call FindByID function")
+	return User{}, nil
 }
 
 func (m *MockRepository) FindAll() []User {
