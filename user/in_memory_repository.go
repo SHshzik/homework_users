@@ -1,8 +1,6 @@
 package user
 
-import (
-	"errors"
-)
+import "fmt"
 
 type InMemoryRepository struct {
 	Users  map[int]User
@@ -20,7 +18,7 @@ func (i *InMemoryRepository) Save(user *User) error {
 func (i *InMemoryRepository) FindByID(id int) (User, error) {
 	user, ok := i.Users[id]
 	if !ok {
-		return User{}, errors.New("user not found")
+		return user, fmt.Errorf("user not found")
 	}
 	return user, nil
 }
@@ -36,7 +34,7 @@ func (i *InMemoryRepository) FindAll() []User {
 func (i *InMemoryRepository) DeleteByID(id int) error {
 	_, ok := i.Users[id]
 	if !ok {
-		return errors.New("user not found")
+		return fmt.Errorf("user not found")
 	}
 	delete(i.Users, id)
 

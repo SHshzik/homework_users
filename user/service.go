@@ -27,3 +27,7 @@ func (uService *Service) ListUsers() []User {
 func (uService *Service) RemoveUser(id int) error {
 	return uService.repo.DeleteByID(id)
 }
+
+func NewService(repo Repository) Service {
+	return Service{repo: repo}
+}
