@@ -5,4 +5,5 @@ type Repository interface {
 	FindByID(id int) (User, error)
 	FindAll() []User
 	DeleteByID(id int) error
+	FindByRole(role string) []User
 }

@@ -40,3 +40,13 @@ func (i *InMemoryRepository) DeleteByID(id int) error {
 
 	return nil
 }
+
+func (i *InMemoryRepository) FindByRole(role string) []User {
+	r := make([]User, 0)
+	for _, user := range i.Users {
+		if user.Role == role {
+			r = append(r, user)
+		}
+	}
+	return r
+}

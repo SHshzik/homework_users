@@ -23,3 +23,8 @@ func (m *MockRepository) DeleteByID(id int) error {
 	fmt.Println("Call DeleteByID function")
 	return nil
 }
+
+func (m *MockRepository) FindByRole(role string) []User {
+	fmt.Println("Call FindByRole function")
+	return nil
+}

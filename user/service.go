@@ -28,6 +28,10 @@ func (uService *Service) RemoveUser(id int) error {
 	return uService.repo.DeleteByID(id)
 }
 
+func (uService *Service) FindByRole(role string) []User {
+	return uService.repo.FindByRole(role)
+}
+
 func NewService(repo Repository) Service {
 	return Service{repo: repo}
 }

@@ -3,11 +3,8 @@ package main
 import (
 	"fmt"
 	"log/slog"
-	"slices"
 	"user_workhome/user"
 )
-
-var roles = []string{"admin", "user", "guest"}
 
 func createUser(service user.Service) {
 	var (
@@ -31,7 +28,7 @@ func createUser(service user.Service) {
 		slog.Error(err.Error())
 		return
 	}
-	valid := validRole(role)
+	valid := user.ValidRole(role)
 	if !valid {
 		fmt.Println("Wrong user role")
 		return
@@ -44,8 +41,4 @@ func createUser(service user.Service) {
 	}
 	fmt.Println("User successfully created")
 	fmt.Println(newUser)
-}
-
-func validRole(role string) bool {
-	return slices.Contains(roles, role)
 }

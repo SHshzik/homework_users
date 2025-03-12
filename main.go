@@ -19,10 +19,10 @@ func main() {
 
 	var c string
 	for loop := true; loop; {
-		fmt.Println("Type one of available command: list, find, create, delete, exit:")
+		fmt.Println("Type one of available command: list, find, find_by_role, create, delete, exit:")
 		_, err := fmt.Scanln(&c)
 		if err != nil {
-			fmt.Println("Type one of available command: list, find, create, delete, exit:")
+			fmt.Println("Type one of available command: list, find, find_by_role, create, delete, exit:")
 			continue
 		}
 		switch c {
@@ -30,6 +30,8 @@ func main() {
 			listUsers(service)
 		case "find":
 			findUser(service)
+		case "find_by_role":
+			findByRole(service)
 		case "create":
 			createUser(service)
 		case "delete":
